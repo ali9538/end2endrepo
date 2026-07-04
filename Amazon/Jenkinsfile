@@ -30,5 +30,22 @@ pipeline {
                 archiveArtifacts artifacts: 'Amazon/Amazon-Web/target/*.war', fingerprint: true
             }
         }
+
+        stage('Deploy') {
+            steps {
+                dir('Amazon') {
+                    sh 'ansible-playbook -i ansible/inventory.ini ansible/site.yml'
+                }
+            }
+        }
+
+        stage('Health Check') {
+            steps {
+                dir('Amazon') {
+                    sh './scripts/health_check.sh 20.219.152.32'
+                }
+            }
+        }
+
     }
 }
