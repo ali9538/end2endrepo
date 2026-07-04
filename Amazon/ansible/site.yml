@@ -27,7 +27,7 @@
 
     - name: Copy WAR file
       copy:
-        src: files/Amazon.war
+        src: ../Amazon-web/target/Amazon.war
         dest: /var/lib/tomcat10/webapps/Amazon.war
         mode: '0644'
 
